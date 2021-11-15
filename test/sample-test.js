@@ -1,19 +1,27 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("Greeter", function () {
-  it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, world!");
-    await greeter.deployed();
+describe("Token", function () {
+  it("Deployed contract and transfer", async function () {
+    // Deploy Token contract
+    const Token = await ethers.getContractFactory("Token");
+    const token = await Token.deploy();
+    await token.deployed();
+    console.log("Token deployed to:", token.address);
+    const owner = await token.owner();
+    console.log("Token owner:", owner);
 
-    expect(await greeter.greet()).to.equal("Hello, world!");
+    let balance = await token.balanceOf(owner);
+    expect(balance.toString()).to.equal("1000000");
 
-    const setGreetingTx = await greeter.setGreeting("Hola, mundo!");
+    const dest = '0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199';
+    const transferTx = await token.transfer(dest, 1000000);
+    await transferTx.wait();
+    
+    balance = await token.balanceOf(dest);
+    expect(balance.toString()).to.equal("1000000");
 
-    // wait until the transaction is mined
-    await setGreetingTx.wait();
-
-    expect(await greeter.greet()).to.equal("Hola, mundo!");
+    balance = await token.balanceOf(owner);
+    expect(balance.toString()).to.equal("0");
   });
 });
