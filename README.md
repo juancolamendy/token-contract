@@ -38,6 +38,10 @@ npx hardhat test
 npx hardhat run scripts/deploy.js --network localhost
 ```
 
+```bash
+npx hardhat run scripts/deploy.js --network ropsten
+```
+
 ## Getting Started
 Run the development server:
 

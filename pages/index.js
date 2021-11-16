@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 
 import Token from '../artifacts/contracts/Token.sol/Token.json';
 
-const tokenAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3";
+const tokenAddress = "0x475498bF7511Ae8e96bb9184881b3A177a19D3F8";
 
 export default function Home() {
   const [userAccount, setUserAccount] = useState('');
