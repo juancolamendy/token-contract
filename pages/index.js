@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 
 import Token from '../artifacts/contracts/Token.sol/Token.json';
 
+// ropsten address
 const tokenAddress = "0x475498bF7511Ae8e96bb9184881b3A177a19D3F8";
 
 export default function Home() {
@@ -11,10 +12,23 @@ export default function Home() {
   const [balance, setBalance] = useState('');
   
   const getBalance = async () => {
+    // detect the Ethereum provider
+    // console.log('window.ethereum', window.ethereum);
     if (typeof window.ethereum !== 'undefined') {
+      // call pop-up UI that asks permission to connect the dApp to MetaMask
+      // if already connected, no pop-up UI
       const [account] = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      console.log(`Connected using account:${account}`)
+
+      // create a provider
       const provider = new ethers.providers.Web3Provider(window.ethereum);
+      console.log('Created provider', provider);
+
+      // create contract
       const contract = new ethers.Contract(tokenAddress, Token.abi, provider);
+      console.log('Created contract', contract);
+
+      // execute a remote call in the contract
       const balance = await contract.balanceOf(account);
       console.log(`Balance: ${balance.toString()} - Account: ${account} ` );
       setBalance(balance.toString());
