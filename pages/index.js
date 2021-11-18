@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 
 import Token from '../artifacts/contracts/Token.sol/Token.json';
 
-// ropsten address
+// public address in ropsten
 const tokenAddress = "0x475498bF7511Ae8e96bb9184881b3A177a19D3F8";
 
 export default function Home() {
@@ -45,7 +45,7 @@ export default function Home() {
       await transaction.wait();
       console.log(`${amount} Coins successfully sent to ${userAccount}`);
     }    
-  };
+  }
   
   return (
     <div>

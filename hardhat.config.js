@@ -22,10 +22,10 @@ module.exports = {
     hardhat: {
       chainId: 1337,
     },
-    ropsten: {
-      url: `https://ropsten.infura.io/v3/${process.env.INFURA_KEY}`,
-      accounts: [`0x${process.env.ROPSTEN_ACCT_SECRET}`]
-    }
+    //ropsten: {
+    //  url: `https://ropsten.infura.io/v3/${process.env.INFURA_KEY}`,
+    //  accounts: [`0x${process.env.ROPSTEN_ACCT_SECRET}`]
+    //}
     // rinkeby: {
     //   url: "https://rinkeby.infura.io/v3/projectid",
     //   accounts: [process.env.a2key]
